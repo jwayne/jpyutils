@@ -8,11 +8,20 @@ def list_modules(dirname):
     names = []
     for root, _, files in os.walk(dirname):
         for file in files:
-            if not file.endswith('.py') or file == '__init__.py':
-                continue
-            name = os.path.join(root, file)[len(dirname)+1:].replace('/','.')
-            names.append(name[:-3])
+            if file.endswith('.py') and file == '__init__.py':
+                name = os.path.join(root, file)[len(dirname)+1:].replace('/','.')
+                names.append(name[:-3])
     return sorted(names)
+
+
+def get_module(parent, name):
+    """
+    """
+    try:
+        module = __import__("%s.%s" % (parent, name), fromlist=['x'])
+    except (ImportError, AttributeError), e:
+        raise ImportError("%s: %s.%s does not exist." % (e, parent, name))
+    return module
 
 
 def get_module_cls(parent, name):
