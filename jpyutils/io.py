@@ -1,4 +1,3 @@
-import logging
 import os
 import re
 
@@ -31,6 +30,4 @@ def get_filename(dirname, filename, extension):
         ind + 1,
         extension))
     assert not os.path.exists(path)
-
-    logging.info("Output file: '%s'" % path)
     return path

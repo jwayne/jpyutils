@@ -1,5 +1,5 @@
 import argparse
-import logging
+from jlogging import logging_setup
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -21,15 +21,5 @@ class ArgumentParser(argparse.ArgumentParser):
             loglevel = 'debug'
         else:
             loglevel = args.loglevel
-        setup_logging(loglevel)
+        logging_setup(loglevel)
         return args
-        
-
-def setup_logging(loglevel="warning"):
-    numeric_level = getattr(logging, loglevel.upper(), None)
-    if not isinstance(numeric_level, int):
-        raise ValueError('Invalid log level: %s' % loglevel)
-    logging.basicConfig(
-        format='%(levelname)s %(asctime)s: %(message)s',
-        datefmt='%m/%d/%Y %I:%M:%S%p',
-        level=numeric_level)
