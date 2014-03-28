@@ -1,4 +1,6 @@
 import argparse
+import logging
+import sys
 from jlogging import logging_setup
 
 
@@ -22,4 +24,5 @@ class ArgumentParser(argparse.ArgumentParser):
         else:
             loglevel = args.loglevel
         logging_setup(loglevel)
+        logging.debug(" ".join(sys.argv))
         return args

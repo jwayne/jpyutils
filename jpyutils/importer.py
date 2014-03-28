@@ -20,7 +20,7 @@ def get_module(parent, name):
     try:
         module = __import__("%s.%s" % (parent, name), fromlist=['x'])
     except (ImportError, AttributeError), e:
-        raise ImportError("%s: %s.%s does not exist." % (e, parent, name))
+        raise ImportError("Could not import %s.%s: %s" % (parent, name, e))
     return module
 
 
@@ -40,7 +40,7 @@ def get_module_cls(parent, name):
         module_clsname = "".join(s.capitalize() for s in name.split('.')[-1].split('_'))
         module_cls = getattr(module, module_clsname)
     except (ImportError, AttributeError), e:
-        raise ImportError("%s: %s.%s.%s does not exist." % (e, parent, name, module_clsname))
+        raise ImportError("Could not import %s.%s.%s: %s" % (parent, name, module_clsname, e))
     return module_cls
 
 
