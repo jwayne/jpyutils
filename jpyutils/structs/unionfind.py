@@ -111,7 +111,7 @@ Insert a sequence of objects into the structure.  All must be Python hashable.''
     def __len__(self):
         '''\
 Return the number of distinct sets.'''
-        return sum(num_weights.values())
+        return sum(self.num_weights.values())
     def __str__(self):
         '''\
 Included for testing purposes only.
